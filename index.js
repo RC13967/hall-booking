@@ -61,11 +61,8 @@ app.put("/roombook", async (request, response) => {
        let message = await client.db("halls").collection("hall") .updateOne({
         roomName :userData.roomName,   //filters the room by name
       },
-      {
-        $push: {
-          "bookingDetails": userData.bookingDetails,    //adds the details to the room
-        }
-      })
+      { $set : { bookStatus : true,  "bookingDetails": userData.bookingDetails } }  //adds booking details to the room
+     )
        response.send(message);
       }; 
 })
